@@ -1,0 +1,19 @@
+- virtualenv -p python3 env = pour creer 
+- source env/bin/activate = pour activer le environnement virtuel 
+- pip3 install flask flask-login flask-mysqldb flask-WTF
+- pip3 list
+- pip3 freeze > requirements.txt = pour creer liste de requirements
+
+- pip install python-dotenv ( from dotenv import load_dotenv pour les variables env )
+- pip3 install pyjwt 
+- pip3 install bcrypt
+
+
+- expo init client: pour lancer le client blanco
+
+//pour instaler React Navigation
+npm install @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+
+luego creo el cuerpo de mi projetc
