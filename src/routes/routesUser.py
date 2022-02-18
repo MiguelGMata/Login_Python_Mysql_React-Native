@@ -43,8 +43,7 @@ def signIn():
         if len(user) > 0:
             if bcrypt.hashpw(password, user[3].encode('utf-8')) == user[3].encode('utf-8'):
                 session['email'] = user[2]
-                #id = user[0]
-                return jsonify({'message': 'Utilisateur connecté', 'user': user[2]}) #,redirect(url_for('profil', id))
+                return jsonify({'message': 'Utilisateur connecté', 'user': user[0]})#, redirect(url_for('profil', id=id))
             else:
                 return jsonify({'message': "L'email ne marche pas"})
         else:
@@ -69,18 +68,13 @@ def profil(id):
         else:
             return jsonify({'message': 'Erreur, utilisateur non trouvée'})
     except Exception as ex:
-        return jsonify({'message': 'Erreur'})
+         return jsonify({'message': 'Erreur'})
 
 #-------------------------------------------------------------------------
 @routes_user.route('/logout', methods=["GET", "POST"])
 def logout():
-    session.clear()
-    return redirect(url_for('home'))
-
-@routes_user.route('/test')
-def test():
-    return redirect(url_for('random', id="blah blah"))
-
-@routes_user.route('/<id>')
-def random(id):
-    return id
+    try:
+        session.clear()
+        return jsonify({'message': 'Session fermer'})
+    except Exception as ex:
+        return jsonify({'message': 'Erreur'})
