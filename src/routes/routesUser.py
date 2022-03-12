@@ -40,14 +40,17 @@ def signIn():
         cur.execute("SELECT * FROM users WHERE email=%s",[email])
         user = cur.fetchone()
         cur.close()
-        if len(user) > 0:
-            if bcrypt.hashpw(password, user[3].encode('utf-8')) == user[3].encode('utf-8'):
-                session['email'] = user[2]
-                return jsonify({'message': 'Utilisateur connecté', 'user': user[0]})#, redirect(url_for('profil', id=id))
-            else:
-                return jsonify({'message': "L'email ne marche pas"})
+        if email == '':
+            return jsonify({'error': "Le champ email est vide vous devez recommencer"})
         else:
-           return jsonify({'message': "Erreur l'utilisateur ne marche pas"})
+            if len(user) > 0:
+                if bcrypt.hashpw(password, user[3].encode('utf-8')) == user[3].encode('utf-8'):
+                    session['email'] = user[2]
+                    return jsonify({'message': 'Utilisateur connecté', 'user': user[0]})#, redirect(url_for('profil', id=id))
+                else:
+                    return jsonify({'error': "Le mot de passe est incorrect"})
+            else:
+                return jsonify({'error': "Erreur l'utilisateur ne marche pas"})
     else:
         return redirect(url_for('singUp'))
 
